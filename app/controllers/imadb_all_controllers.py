@@ -1,6 +1,8 @@
 from fastapi import FastAPI
-from app.crud.age_group_crud import get_age_groups, get_patient_information_cvd
-from app.schemas.age_group_schema import AgeGroup, PatientInformationCvd
+from app.crud.repository import get_age_groups, get_patient_information_cvd, get_nutricional_data, \
+    get_frequency_food_consumption, get_food_consumption
+from app.schemas.age_group_schema import AgeGroup, PatientInformationCvd, NutricionalData, FrequencyFoodConsumption, \
+    FoodConsumption
 from app.models.Palettes import Palette
 from typing import List
 from fastapi import File, UploadFile, Depends
@@ -29,3 +31,21 @@ def buscar_age_groups(skip: int = 0, limit: int = 10, db: Session = Depends(get_
 def buscar_patient_information_cvd(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     patient_information_cvd = get_patient_information_cvd(db=db, skip=skip, limit=limit)
     return patient_information_cvd
+
+
+@app.get("/buscar-nutricional-data", response_model=List[NutricionalData])
+def buscar_nutricional_data(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    nutricional_data = get_nutricional_data(db=db, skip=skip, limit=limit)
+    return nutricional_data
+
+
+@app.get("/buscar-frequency-food-consumption", response_model=List[FrequencyFoodConsumption])
+def buscar_frequency_food_consumption(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    frequency_food_consumption = get_frequency_food_consumption(db=db, skip=skip, limit=limit)
+    return frequency_food_consumption
+
+
+@app.get("/buscar-food-consumption", response_model=List[FoodConsumption])
+def buscar_food_consumption(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    food_consumption = get_food_consumption(db=db, skip=skip, limit=limit)
+    return food_consumption

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String, Float, Text
 from app.config.database import Base
 
 
@@ -48,7 +48,7 @@ class FoodConsumption(Base):
     ethnicity_id = Column(Integer)
     nutritional_data_id = Column(Integer)
     carga_viral = Column(Float)
-    comorbity = Column(String(60))
+    comorbity = Column(Text)
     leite = Column(Integer)
     Iogurte = Column(Integer)
     queijo_branco = Column(Integer)
