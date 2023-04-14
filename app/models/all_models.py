@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, Float, Text
+from sqlalchemy import Column, Integer, String, Float, Text, ForeignKey
 from app.config.database import Base
+from sqlalchemy.orm import relationship, registry
 
 
 class AgeGroup(Base):
@@ -24,6 +25,9 @@ class PatientInformationCvd(Base):
     group = Column(String(60), index=True)
     vaccination = Column(String(60), index=True)
 
+    food_consumption = relationship("FoodConsumption", back_populates="patient_information_cvd")
+#    cytokine = relationship("CytokinesCovid", back_populates="patient_information_cvd")
+
 
 class NutricionalData(Base):
     __tablename__ = "nutricional_data"
@@ -43,7 +47,7 @@ class FoodConsumption(Base):
     __tablename__ = 'food_consumption'
 
     id = Column(Integer, primary_key=True)
-    patient_information_id = Column(Integer)
+    patient_information_id = Column(Integer, ForeignKey('patient_information_cvd.id'))
     age_group_id = Column(Integer)
     ethnicity_id = Column(Integer)
     nutritional_data_id = Column(Integer)
@@ -100,6 +104,8 @@ class FoodConsumption(Base):
     chocolate_s_achocolatados = Column(Integer)
     macarrao_instantaneo = Column(Integer)
 
+    patient_information_cvd = relationship("PatientInformationCvd", back_populates="food_consumption")
+
 
 class Ethnicity(Base):
     __tablename__ = 'ethnicity'
@@ -142,6 +148,7 @@ class CytokinesCovid(Base):
     IL_17 = Column(Float, name="IL-17")
     DIS = Column(Integer, name="DIS")
 
+ #   patient_information_cvd = relationship("PatientInformationCvd", back_populates="cytokines_covid")
 
 class BloodCountData(Base):
     __tablename__ = 'blood_count_data'
