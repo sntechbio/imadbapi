@@ -107,8 +107,8 @@ class FoodConsumption(BaseModel):
 
 
 class CytokinesCovid(BaseModel):
-    id: Optional[int] = Field(None, description='ID', gt=0)
-    patient_information_id: Optional[int] = Field(None, description='Patient Information ID', gt=0)
+    id: Optional[int] = Field(None, description='id', gt=0)
+    patient_information_id: Optional[int] = Field(None, description='patient_information_id', gt=0)
     FGF_basic: Optional[float] = Field(None, description='FGF Basic')
     G_CSF: Optional[float] = Field(None, description='G-CSF')
     GM_CSF: Optional[float] = Field(None, description='GM-CSF')

@@ -26,7 +26,7 @@ class PatientInformationCvd(Base):
     vaccination = Column(String(60), index=True)
 
     food_consumption = relationship("FoodConsumption", back_populates="patient_information_cvd")
-#    cytokine = relationship("CytokinesCovid", back_populates="patient_information_cvd")
+    cytokines_covid = relationship("CytokinesCovid", back_populates="patient_information_cvd")
 
 
 class NutricionalData(Base):
@@ -118,7 +118,7 @@ class CytokinesCovid(Base):
     __tablename__ = 'cytokines_covid'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    patient_information_id = Column(Integer, name="patient-information-id")
+    patient_information_id = Column(Integer, ForeignKey('patient_information_cvd.id'))
     FGF_basic = Column(Float, name="FGF-basic")
     G_CSF = Column(Float, name="G-CSF")
     GM_CSF = Column(Float, name="GM-CSF")
@@ -148,7 +148,7 @@ class CytokinesCovid(Base):
     IL_17 = Column(Float, name="IL-17")
     DIS = Column(Integer, name="DIS")
 
- #   patient_information_cvd = relationship("PatientInformationCvd", back_populates="cytokines_covid")
+    patient_information_cvd = relationship("PatientInformationCvd", back_populates="cytokines_covid")
 
 class BloodCountData(Base):
     __tablename__ = 'blood_count_data'
