@@ -140,3 +140,39 @@ class CytokinesCovid(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class Ethnicity(BaseModel):
+    id = Optional[int]
+    group = Optional[str]
+
+    class Config:
+        arbitrary_types_allowed = True
+        orm_mode = True
+
+
+class BloodCountData(BaseModel):
+    id: Optional[int]
+    patient_information_id: Optional[int]
+    leucocitos_WBC: Optional[float]
+    contagem_de_hemacias_RBC: Optional[float]
+    hemoglobina: Optional[float]
+    hematocrito_HCT: Optional[str]
+    MCV: Optional[int]
+    MCH: Optional[float]
+    MCHC: Optional[float]
+    RDW: Optional[str]
+    granulocitos: Optional[str]
+    monocitos: Optional[str]
+    linfocitos: Optional[str]
+    plaquetas: Optional[int]
+    MPV: Optional[float]
+    PDW_variacao_de_tamanho_das_plaquetas: Optional[str]
+    PCT: Optional[str]
+    GLR: Optional[str]
+    MLR: Optional[str]
+    PLT_LYM: Optional[str]
+    PLR: Optional[str]
+
+    class Config:
+        orm_mode = True

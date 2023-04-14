@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from app.crud.repository import get_age_groups, get_patient_information_cvd, get_nutricional_data, \
-    get_frequency_food_consumption, get_food_consumption, get_cytokines_covid
+    get_frequency_food_consumption, get_food_consumption, get_cytokines_covid, get_ethnicity, get_blood_count_data
 from app.schemas.all_schemas import AgeGroup, PatientInformationCvd, NutricionalData, FrequencyFoodConsumption, \
-    FoodConsumption, CytokinesCovid
+    FoodConsumption, CytokinesCovid, Ethnicity, BloodCountData
 from app.models.Palettes import Palette
 from typing import List
 from fastapi import File, UploadFile, Depends
@@ -55,3 +55,14 @@ def buscar_food_consumption(skip: int = 0, limit: int = 10, db: Session = Depend
 def buscar_cytokines_covid(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     cytokines_covid = get_cytokines_covid(db=db, skip=skip, limit=limit)
     return cytokines_covid
+
+
+@app.get("/buscar-ethnicity", response_model=None)
+def buscar_ethnicity(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    ethnicity = get_ethnicity(db=db, skip=skip, limit=limit)
+    return ethnicity
+
+@app.get("/buscar-blood-count-data", response_model=List[BloodCountData])
+def buscar_blood_count_data(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    blood_count_data = get_blood_count_data(db=db, skip=skip, limit=limit)
+    return blood_count_data
