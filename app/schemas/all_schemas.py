@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, Text
 
 
@@ -101,6 +101,42 @@ class FoodConsumption(BaseModel):
     geleia_industrializadas: Optional[int]
     chocolate_s_achocolatados: Optional[int]
     macarrao_instantaneo: Optional[int]
+
+    class Config:
+        orm_mode = True
+
+
+class CytokinesCovid(BaseModel):
+    id: Optional[int] = Field(None, description='ID', gt=0)
+    patient_information_id: Optional[int] = Field(None, description='Patient Information ID', gt=0)
+    FGF_basic: Optional[float] = Field(None, description='FGF Basic')
+    G_CSF: Optional[float] = Field(None, description='G-CSF')
+    GM_CSF: Optional[float] = Field(None, description='GM-CSF')
+    PDGF: Optional[float] = Field(None, description='PDGF')
+    VEGF: Optional[float] = Field(None, description='VEGF')
+    IL_1_beta: Optional[float] = Field(None, description='IL-1 beta')
+    IL_6: Optional[float] = Field(None, description='IL-6')
+    IL_12p70: Optional[float] = Field(None, description='IL-12p70')
+    IFN_gamma: Optional[float] = Field(None, description='IFN gamma')
+    TNF_alpha: Optional[float] = Field(None, description='TNF alpha')
+    CCL2: Optional[float] = Field(None, description='CCL2')
+    CCL3: Optional[float] = Field(None, description='CCL3')
+    CCL4: Optional[float] = Field(None, description='CCL4')
+    CCL5: Optional[float] = Field(None, description='CCL5')
+    Eotaxin: Optional[float] = Field(None, description='Eotaxin')
+    IL_4: Optional[float] = Field(None, description='IL-4')
+    IL_5: Optional[float] = Field(None, description='IL-5')
+    IL_13: Optional[float] = Field(None, description='IL-13')
+    IL_2: Optional[float] = Field(None, description='IL-2')
+    IL_10: Optional[float] = Field(None, description='IL-10')
+    CXCL10: Optional[float] = Field(None, description='CXCL10')
+    CXCL8: Optional[float] = Field(None, description='CXCL8')
+    IL_1ra: Optional[float] = Field(None, description='IL-1ra')
+    IL_7: Optional[float] = Field(None, description='IL-7')
+    IL_9: Optional[float] = Field(None, description='IL-9')
+    IL_15: Optional[float] = Field(None, description='IL-15')
+    IL_17: Optional[float] = Field(None, description='IL-17')
+    DIS: Optional[int] = Field(None, description='DIS', ge=0)
 
     class Config:
         orm_mode = True

@@ -1,5 +1,5 @@
 from app.models.all_models import AgeGroup, PatientInformationCvd, NutricionalData, FrequencyFoodConsumption, \
-    FoodConsumption
+    FoodConsumption, CytokinesCovid
 from sqlalchemy.orm import Session
 
 
@@ -21,3 +21,6 @@ def get_frequency_food_consumption(db: Session, skip: int = 0, limit: int = 100)
 
 def get_food_consumption(db: Session, skip: int = 0, limit: int = 100):
     return db.query(FoodConsumption).offset(skip).limit(limit).all()
+
+def get_cytokines_covid(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(CytokinesCovid).offset(skip).limit(limit).all()

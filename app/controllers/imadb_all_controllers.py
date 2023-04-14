@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from app.crud.repository import get_age_groups, get_patient_information_cvd, get_nutricional_data, \
-    get_frequency_food_consumption, get_food_consumption
-from app.schemas.age_group_schema import AgeGroup, PatientInformationCvd, NutricionalData, FrequencyFoodConsumption, \
-    FoodConsumption
+    get_frequency_food_consumption, get_food_consumption, get_cytokines_covid
+from app.schemas.all_schemas import AgeGroup, PatientInformationCvd, NutricionalData, FrequencyFoodConsumption, \
+    FoodConsumption, CytokinesCovid
 from app.models.Palettes import Palette
 from typing import List
 from fastapi import File, UploadFile, Depends
@@ -49,3 +49,9 @@ def buscar_frequency_food_consumption(skip: int = 0, limit: int = 10, db: Sessio
 def buscar_food_consumption(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     food_consumption = get_food_consumption(db=db, skip=skip, limit=limit)
     return food_consumption
+
+
+@app.get("/buscar-cytokines-covid", response_model=List[CytokinesCovid])
+def buscar_cytokines_covid(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    cytokines_covid = get_cytokines_covid(db=db, skip=skip, limit=limit)
+    return cytokines_covid
