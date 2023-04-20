@@ -12,3 +12,13 @@ def get_cytokines_by_classification(classification: str):
     else:
         return "Não foi possível obter os dados."
 
+
+def remover_chaves(cytokines_data):
+    if isinstance(cytokines_data, dict):
+        return {k: remover_chaves(v) for k, v in cytokines_data.items() if k not in ["id", "patientInformationId", "dis"]}
+
+    elif isinstance(cytokines_data, list):
+        return [remover_chaves(elem) for elem in cytokines_data]
+    else:
+        return cytokines_data
+
