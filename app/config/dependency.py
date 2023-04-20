@@ -7,3 +7,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def get_url_api():
+    return "http://localhost:8080/api"
